@@ -6,9 +6,15 @@ from tkinter.filedialog import *
 while True:
     choice = int(input("Enter 1 to generate QR code and 2 to read QR code: "))
     if choice == 1:
-        text = input("Enter the text you want to convert into QR code: ")
-
-        qr = pyqrcode.create(text)
+        ## Original -- text input to QR
+#         text = input("Enter the text you want to convert into QR code: ")
+#         qr = pyqrcode.create(text)
+        ## Txt file to QR
+        txt_file = askopenfilename()
+        with open(txt_file, 'r') as file:
+            data = file.read().replace('\n', '')
+        
+        qr = pyqrcode.create(data)
         qr.png("myCode.png", scale=8)
 
     elif choice == 2:
